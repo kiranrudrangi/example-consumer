@@ -13,7 +13,7 @@ describe('API Pact test', () => {
   afterEach(() => mockProvider.verify());
   afterAll(() => mockProvider.finalize());
 
-  describe('retrieving a product', () => {
+  describe('retrieving one product', () => {
     test('ID 10 exists', async () => {
       // Arrange
       const expectedProduct = { id: '10', type: 'CREDIT_CARD', name: '28 Degrees'}
@@ -71,8 +71,9 @@ describe('API Pact test', () => {
         // make request to Pact mock server
         await expect(api.getProduct('11')).rejects.toThrow('Request failed with status code 404');
     });
-  });
-  describe('retrieving products', () => {
+  }); // end describe retrieving one product
+
+  describe('retrieving all products', () => {
     test('products exists', async () => {
       // set up Pact interactions
       const expectedProduct = { id: '10', type: 'CREDIT_CARD', name: '28 Degrees' }
@@ -104,5 +105,6 @@ describe('API Pact test', () => {
       // assert that we got the expected response
       expect(products).toStrictEqual([new Product(expectedProduct)]);
     });
-  });
-});
+  }); //end describe retrieving all products
+
+}); // end API Pact test
